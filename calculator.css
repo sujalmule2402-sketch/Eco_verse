@@ -1,0 +1,225 @@
+/* EcoVerse Carbon Footprint Calculator Style System */
+
+.calc-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 24px;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .calc-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.calc-section {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.calc-intro {
+  border-left: 4px solid var(--primary);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.slider-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.01);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  border-radius: var(--radius-md);
+}
+
+.slider-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.slider-label {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.slider-label i {
+  color: var(--primary);
+}
+
+.slider-val {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+/* Custom styled range slider */
+.custom-slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.1);
+  outline: none;
+  transition: background 0.3s;
+}
+
+.custom-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--primary);
+  cursor: pointer;
+  box-shadow: 0 0 10px var(--primary);
+  transition: transform 0.1s;
+}
+
+.custom-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+.custom-slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border: none;
+  border-radius: 50%;
+  background: var(--primary);
+  cursor: pointer;
+  box-shadow: 0 0 10px var(--primary);
+}
+
+/* Results Card styling */
+.results-card {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 30px;
+  background: linear-gradient(135deg, rgba(16,185,129,0.05) 0%, rgba(18,27,22,0.7) 100%);
+  border: 1px solid var(--border-color);
+}
+
+.footprint-circle {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  border: 4px dashed var(--primary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 0;
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.1);
+}
+
+.footprint-circle .val {
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: var(--primary);
+  font-family: 'Outfit', sans-serif;
+  line-height: 1;
+}
+
+.footprint-circle .unit {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  margin-top: 4px;
+  font-weight: 700;
+}
+
+/* Charts comparison layout */
+.comparison-chart-box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 10px;
+}
+
+.comparison-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.comparison-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.comparison-bar-track {
+  width: 100%;
+  height: 12px;
+  background: rgba(255,255,255,0.03);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.comparison-bar {
+  height: 100%;
+  border-radius: 6px;
+  transition: width 0.8s ease-out;
+}
+
+.comparison-bar.user-bar {
+  background: linear-gradient(90deg, var(--primary) 0%, #34d399 100%);
+}
+
+.comparison-bar.avg-bar {
+  background: #4b5563;
+}
+
+.comparison-bar.target-bar {
+  background: var(--secondary);
+}
+
+/* Recommendation list */
+.recommendations-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  text-align: left;
+}
+
+.rec-card {
+  display: flex;
+  gap: 14px;
+  padding: 14px;
+  background: rgba(255,255,255,0.01);
+  border: 1px solid rgba(255,255,255,0.03);
+  border-radius: var(--radius-md);
+  align-items: center;
+}
+
+.rec-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.rec-text {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}

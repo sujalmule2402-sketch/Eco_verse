@@ -1,2 +1,10 @@
-# Eco_verse
+# Eco_project
 EcoCitizen is a Smart Green City mobile platform that turns everyday environmental actions — tree planting, garbage reporting, e-waste disposal, and civic issue reporting — into a verified, rewarded, and trackable citizen-to-municipality loop.
+
+How it addresses the problem: Instead of one-off awareness campaigns or unverified civic complaint apps, EcoCitizen closes the loop end-to-end. Every action a citizen takes is geo-tagged, timestamped, and AI-verified, so both the citizen and the municipal corporation can trust the data. Complaints get a live status (Submitted → In Progress → Cleaned), tree plantations are checked for survival via monthly photo re-uploads, and e-waste is routed only to authorized centers confirmed via QR scan — directly solving the trust and follow-through gaps that make existing solutions fail.
+Approach: We designed the platform around a single reward currency (Eco Points) that ties together five modules — tree planting, garbage reporting, e-waste disposal, environmental education, and emergency civic complaints — so users have one continuous reason to keep engaging rather than five disconnected features. Gamification (badges, levels, leaderboards, quizzes) was layered on top of the education and plant-encyclopedia modules to make sustained engagement realistic, not just a launch-week spike.
+AI methods/models used and why:
+Computer vision (CNN-based image classification, e.g. a fine-tuned TensorFlow model, with YOLO for object detection) — used to verify that an uploaded photo actually shows a planted tree (not a random image), and to detect garbage/waste in reported complaint photos. This is the core trust layer that prevents users from gaming the reward system.
+Geo-tagging + metadata validation — cross-checks GPS coordinates and timestamps against the photo's EXIF data to confirm the action happened at the claimed location and time.
+Image similarity/tracking (for monthly tree check-ins) — compares new photos of the same tree location over time to verify the tree is still alive and growing, rather than a new photo of a different plant.
+Together, these AI checks let the platform scale citizen verification without needing manual review for every submission, which is what makes the reward system trustworthy enough for a municipal corporation to act on.

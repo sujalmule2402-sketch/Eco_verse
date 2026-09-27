@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Citizen Portal - EcoVerse</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+  
+  <!-- Shared & Portal Specific Stylesheets -->
+  <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="portal.css">
+</head>
+<body>
+  
+  <div class="app-container">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="logo">
+        <a href="index.html" style="display:flex; align-items:center; gap:12px;">
+          <i class="fa-solid fa-leaf green-glow"></i>
+          <span>EcoVerse</span>
+        </a>
+      </div>
+      
+      <nav class="nav-links">
+        <a href="index.html" class="nav-item">
+          <i class="fa-solid fa-house"></i>
+          <span>Home</span>
+        </a>
+        <a href="#" class="nav-item active" data-tab="dashboard">
+          <i class="fa-solid fa-chart-line"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="#" class="nav-item" data-tab="plant-tree">
+          <i class="fa-solid fa-seedling"></i>
+          <span>Plant a Tree</span>
+        </a>
+        <a href="#" class="nav-item" data-tab="garbage-spot">
+          <i class="fa-solid fa-trash-can"></i>
+          <span>Garbage Spotter</span>
+        </a>
+        <a href="#" class="nav-item" data-tab="e-waste">
+          <i class="fa-solid fa-recycle"></i>
+          <span>E-Waste Centers</span>
+        </a>
+        <a href="education.html" class="nav-item">
+          <i class="fa-solid fa-book-open"></i>
+          <span>Green Knowledge</span>
+        </a>
+        <a href="calculator.html" class="nav-item">
+          <i class="fa-solid fa-calculator"></i>
+          <span>Carbon Footprint</span>
+        </a>
+        <a href="#" class="nav-item" data-tab="emergency">
+          <i class="fa-solid fa-circle-exclamation"></i>
+          <span>Emergency Alerts</span>
+        </a>
+      </nav>
+      
+      <div class="sidebar-footer">
+        <div class="theme-badge">
+          <i class="fa-solid fa-shield-halved"></i>
+          <span>Verified Citizen</span>
+        </div>
+      </div>
+    </aside>
+    
+    <!-- Main Content Area -->
+    <main class="main-content">
+      
+      <!-- Top Header -->
+      <header class="app-header">
+        <div class="header-left">
+          <h1 id="page-title">Citizen Portal</h1>
+          <p id="page-subtitle" class="text-muted">Welcome back, Eco-Warrior!</p>
+        </div>
+        
+        <div class="header-right">
+          <!-- Live AQI widget -->
+          <div class="aqi-widget glass-card">
+            <span class="aqi-dot good"></span>
+            <div>
+              <div class="aqi-title">City AQI: <span class="aqi-val">--</span></div>
+              <div class="aqi-desc">Fetching Air Quality...</div>
+            </div>
+          </div>
+          
+          <!-- User Profile Summary -->
+          <div class="user-summary glass-card">
+            <div class="points-badge">
+              <i class="fa-solid fa-circle-nodes"></i>
+              <span id="header-points">0</span> <span class="points-lbl">Pts</span>
+            </div>
+            
+            <div class="user-info">
+              <span class="username">You</span>
+              <span class="user-level-badge">Lvl <span id="header-level">1</span></span>
+            </div>
+          </div>
+        </div>
+      </header>
+      
+      <!-- Tab Contents Container -->
+      <div class="tab-viewport">
+        
+        <!-- DASHBOARD TAB -->
+        <section id="dashboard-tab" class="tab-panel active">
+          <!-- Level and Profile Header Card -->
+          <div class="profile-hero glass-card">
+            <div class="hero-left">
+              <div class="avatar-large">
+                <i class="fa-solid fa-user-astronaut"></i>
+              </div>
+              <div class="hero-text">
+                <h2>Eco Citizen Profile</h2>
+                <div class="level-progress-container">
+                  <div class="level-labels">
+                    <span>Level <span id="profile-level">1</span> (<span id="profile-badge">Green Novice</span>)</span>
+                    <span id="level-percentage">0% to Level 2</span>
+                  </div>
+                  <div class="progress-track">
+                    <div class="progress-bar" id="level-bar" style="width: 0%"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="hero-right">
+              <div class="metric-circle-container">
+                <div class="metric-circle-text">
+                  <span class="number" id="stats-total-points">0</span>
+                  <span class="lbl">Total Eco Points</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Stats Grid -->
+          <div class="stats-grid">
+            <div class="metric-card glass-card">
+              <div class="metric-icon green-bg">
+                <i class="fa-solid fa-tree"></i>
+              </div>
+              <div class="metric-data">
+                <span class="num" id="stats-trees">0</span>
+                <span class="lbl">Trees Planted</span>
+              </div>
+            </div>
+            <div class="metric-card glass-card">
+              <div class="metric-icon red-bg">
+                <i class="fa-solid fa-dumpster"></i>
+              </div>
+              <div class="metric-data">
+                <span class="num" id="stats-garbage">0</span>
+                <span class="lbl">Garbage Spots Reported</span>
+              </div>
+            </div>
+            <div class="metric-card glass-card">
+              <div class="metric-icon blue-bg">
+                <i class="fa-solid fa-bolt"></i>
+              </div>
+              <div class="metric-data">
+                <span class="num" id="stats-ewaste">0</span>
+                <span class="lbl">E-Waste Recycled (Kg)</span>
+              </div>
+            </div>
+            <div class="metric-card glass-card">
+              <div class="metric-icon yellow-bg">
+                <i class="fa-solid fa-circle-check"></i>
+              </div>
+              <div class="metric-data">
+                <span class="num" id="stats-complaints">0</span>
+                <span class="lbl">Civic Issues Resolved</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Split Layout -->
+          <div class="dashboard-layout">
+            <div class="dashboard-left">
+              
+              <!-- Active Tree Reminders -->
+              <div class="panel-section glass-card">
+                <h3 class="section-title"><i class="fa-solid fa-clock-rotate-left"></i> Tree Care Reminders</h3>
+                <div class="reminders-list" id="tree-reminders">
+                  <p class="empty-msg text-muted">No trees planted yet.</p>
+                </div>
+              </div>
+              
+              <!-- Recent Activities -->
+              <div class="panel-section glass-card">
+                <h3 class="section-title"><i class="fa-solid fa-receipt"></i> Recent Activities</h3>
+                <div class="activity-feed" id="activity-feed">
+                  <!-- Dynamic items -->
+                </div>
+              </div>
+            </div>
+            
+            <div class="dashboard-right">
+              <!-- Rewards Section -->
+              <div class="panel-section glass-card">
+                <h3 class="section-title"><i class="fa-solid fa-gift"></i> Redeem Eco Points</h3>
+                <p class="section-desc">Spend your earned points on municipal incentives and rewards.</p>
+                <div class="vouchers-list" id="vouchers-container">
+                  <!-- Vouchers dynamic -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        <!-- PLANT A TREE TAB -->
+        <section id="plant-tree-tab" class="tab-panel">
+          <div class="panel-intro glass-card">
+            <div class="intro-left">
+              <h2>🌱 Plant a Tree & Earn 100 Points</h2>
+              <p>Plant a sapling, take a geo-tagged photo with our camera simulation, let our AI analyze the image to confirm it's a real tree, and log it on the city map. Keep it alive to earn monthly maintenance points!</p>
+            </div>
+            <div class="intro-right">
+              <div class="badge-mini"><i class="fa-solid fa-award"></i> 100 Pts / Tree</div>
+            </div>
+          </div>
+          
+          <div class="split-viewport">
+            <div class="viewport-left glass-card">
+              <h3><i class="fa-solid fa-camera"></i> AI Tree Scanner & Logger</h3>
+              
+              <div class="input-group">
+                <label for="tree-species">Select Sapling Species</label>
+                <select id="tree-species" class="form-input"></select>
+              </div>
+              
+              <!-- Simulated Camera Screen -->
+              <div class="camera-simulator">
+                <div class="camera-lens" id="camera-viewport">
+                  <div class="scanner-laser" id="camera-laser"></div>
+                  <div class="camera-overlay">
+                    <div class="corners border-top-left"></div>
+                    <div class="corners border-top-right"></div>
+                    <div class="corners border-bottom-left"></div>
+                    <div class="corners border-bottom-right"></div>
+                    <div class="ai-box" id="ai-detection-box" style="display: none;">
+                      <span class="ai-label" id="ai-detection-label">Tree: 98%</span>
+                    </div>
+                  </div>
+                  <img src="" id="captured-image-preview" alt="Preview" style="display: none;">
+                  <div class="camera-placeholder" id="camera-placeholder-text">
+                    <i class="fa-solid fa-image-portrait"></i>
+                    <span>Simulated Camera Viewfinder</span>
+                  </div>
+                </div>
+                
+                <div class="camera-controls">
+                  <button class="btn btn-secondary" id="btn-camera-select-file">
+                    <i class="fa-solid fa-upload"></i> Upload Photo
+                  </button>
+                  <input type="file" id="tree-image-file" accept="image/*" style="display: none;">
+                  <button class="btn btn-primary btn-glow" id="btn-camera-capture">
+                    <i class="fa-solid fa-bullseye"></i> Capture & AI Scan
+                  </button>
+                </div>
+              </div>
+              
+              <!-- Scan Results -->
+              <div class="scan-results-box" id="scan-results-box" style="display: none;">
+                <div class="status-indicator success" id="ai-status">
+                  <i class="fa-solid fa-circle-check"></i> Tree Successfully Verified!
+                </div>
+                <div class="metadata-rows">
+                  <div class="meta-row">
+                    <span class="lbl"><i class="fa-solid fa-location-crosshairs"></i> Latitude & Longitude</span>
+                    <span class="val" id="tree-coord-val">--</span>
+                  </div>
+                  <div class="meta-row">
+                    <span class="lbl"><i class="fa-solid fa-calendar-day"></i> Timestamp</span>
+                    <span class="val" id="tree-time-val">--</span>
+                  </div>
+                  <div class="meta-row">
+                    <span class="lbl"><i class="fa-solid fa-microchip"></i> Verification Confidence</span>
+                    <span class="val" id="tree-confidence-val">95%</span>
+                  </div>
+                </div>
+                <button class="btn btn-success btn-full" id="btn-submit-tree" style="margin-top: 15px;">
+                  <i class="fa-solid fa-cloud-arrow-up"></i> Log Tree & Earn Points
+                </button>
+              </div>
+            </div>
+            
+            <div class="viewport-right glass-card">
+              <h3><i class="fa-solid fa-map-location-dot"></i> Plotted Trees Map</h3>
+              <p class="text-muted text-sm">Below is your live city map showing tree planting sites and environmental statistics.</p>
+              <div id="tree-map" class="map-container"></div>
+            </div>
+          </div>
+        </section>
+        
+        <!-- GARBAGE SPOTTER TAB -->
+        <section id="garbage-spot-tab" class="tab-panel">
+          <div class="panel-intro glass-card">
+            <div class="intro-left">
+              <h2>🗑️ Garbage Spot Reporting</h2>
+              <p>Help municipal services find and clean roadside trash. Upload a photo, pinpoint the spot, and submit the complaint. Track status changes in real-time and earn **50 points** once cleaned!</p>
+            </div>
+            <div class="intro-right">
+              <div class="badge-mini"><i class="fa-solid fa-award"></i> 50 Pts / Cleaned Spot</div>
+            </div>
+          </div>
+          
+          <div class="split-viewport">
+            <div class="viewport-left glass-card">
+              <h3><i class="fa-solid fa-circle-plus"></i> File a Report</h3>
+              <form id="garbage-report-form">
+                <div class="input-group">
+                  <label for="garbage-desc">Location Details / Landmarks</label>
+                  <input type="text" id="garbage-desc" class="form-input" placeholder="e.g., Near City Park North Gate, next to the bus stop" required>
+                </div>
+                <div class="input-group">
+                  <label for="garbage-severity">Estimated Waste Size</label>
+                  <select id="garbage-severity" class="form-input">
+                    <option value="small">Small Bin Overlap / Litter</option>
+                    <option value="medium" selected>Medium Pile / Scattered Waste</option>
+                    <option value="large">Large Dumping / Illegal Commercial Site</option>
+                  </select>
+                </div>
+                <div class="input-group">
+                  <label>Upload Roadside Photo</label>
+                  <div class="image-uploader" id="garbage-upload-zone">
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                    <span>Click or Drag photo here</span>
+                    <p class="text-xs text-muted">Supports JPG, PNG</p>
+                    <img id="garbage-upload-preview" src="" alt="Upload Preview" style="display:none; max-height:100%; border-radius:6px;">
+                  </div>
+                  <input type="file" id="garbage-file-input" accept="image/*" style="display:none;">
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">
+                  <i class="fa-solid fa-paper-plane"></i> File Complaint & Pin Location
+                </button>
+              </form>
+            </div>
+            
+            <div class="viewport-right glass-card">
+              <h3><i class="fa-solid fa-list-check"></i> Active Reports Status</h3>
+              <p class="text-muted text-sm">Below is the status of garbage reports submitted in your neighborhood. You can mock a municipal cleanup to test the scoring flow!</p>
+              <div class="complaints-list" id="garbage-complaints-container">
+                <!-- Dynamic Items -->
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        <!-- E-WASTE CENTERS TAB -->
+        <section id="e-waste-tab" class="tab-panel">
+          <div class="panel-intro glass-card">
+            <div class="intro-left">
+              <h2>♻️ E-Waste Disposal Finder</h2>
+              <p>Electronics contain toxic heavy metals. Find an authorized collection center, book a drop-off, and scan the center's QR code after safe disposal to claim **150 points**.</p>
+            </div>
+            <div class="intro-right">
+              <div class="badge-mini"><i class="fa-solid fa-award"></i> 150 Pts / Disposal</div>
+            </div>
+          </div>
+          
+          <div class="split-viewport">
+            <div class="viewport-left glass-card">
+              <h3><i class="fa-solid fa-location-dot"></i> Authorized Collection Centers</h3>
+              <div class="centers-directory" id="ewaste-centers-list">
+                <!-- Dynamic Centers list -->
+              </div>
+              
+              <div class="qr-scanner-card" style="margin-top: 20px;">
+                <h4><i class="fa-solid fa-qrcode"></i> Scan Center QR Code</h4>
+                <div class="qr-box-sim" id="qr-scanner-box">
+                  <div class="qr-scan-line"></div>
+                  <i class="fa-solid fa-expand qr-brackets"></i>
+                  <i class="fa-solid fa-qrcode qr-icon-placeholder"></i>
+                  <div class="qr-success-overlay" id="qr-success-overlay" style="display:none;">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <span>QR Verified!</span>
+                  </div>
+                </div>
+                
+                <div class="input-group" style="margin-top: 15px;">
+                  <label for="qr-center-select">Disposal Center Location</label>
+                  <select id="qr-center-select" class="form-input"></select>
+                </div>
+                <div class="input-group">
+                  <label for="ewaste-items">Items Recycled</label>
+                  <input type="text" id="ewaste-items" class="form-input" placeholder="e.g. Broken phone, old charger" value="Old smartphone and battery pack">
+                </div>
+                <button class="btn btn-primary btn-full btn-glow" id="btn-scan-qr">
+                  <i class="fa-solid fa-camera"></i> Simulate QR Code Scan
+                </button>
+              </div>
+            </div>
+            
+            <div class="viewport-right glass-card">
+              <h3><i class="fa-solid fa-map"></i> Recycle Centers Map</h3>
+              <div id="ewaste-map" class="map-container"></div>
+            </div>
+          </div>
+        </section>
+        
+        <!-- EMERGENCY ALERTS TAB -->
+        <section id="emergency-tab" class="tab-panel">
+          <div class="panel-intro glass-card">
+            <div class="intro-left">
+              <h2>🚨 Emergency Civic Complaint Portal</h2>
+              <p>Report urgent municipal breakdowns directly to the response center (potholes, water leaks, broken streetlights). Dispatch logs updates immediately.</p>
+            </div>
+            <div class="intro-right">
+              <div class="badge-mini"><i class="fa-solid fa-triangle-exclamation"></i> Dispatch Active</div>
+            </div>
+          </div>
+          
+          <div class="split-viewport">
+            <div class="viewport-left glass-card">
+              <h3><i class="fa-solid fa-circle-exclamation"></i> File Emergency Report</h3>
+              <form id="emergency-report-form">
+                <div class="input-group">
+                  <label for="emergency-category">Problem Category</label>
+                  <select id="emergency-category" class="form-input">
+                    <option value="water_leak">Water Leakage / Pipe Burst</option>
+                    <option value="electricity">Electricity Pole Spark / Hanging Wire</option>
+                    <option value="streetlight">Broken Streetlights / Dark Zone</option>
+                    <option value="pothole" selected>Severe Road Pothole</option>
+                    <option value="sewage">Sewage Overflow / Drain Blockage</option>
+                    <option value="illegal_dump">Illegal Waste Dumping</option>
+                  </select>
+                </div>
+                
+                <div class="input-group">
+                  <label for="emergency-desc">Incident Description & Landmark</label>
+                  <textarea id="emergency-desc" class="form-input text-area" placeholder="Describe the severity and landmarks." required></textarea>
+                </div>
+                
+                <div class="input-group">
+                  <label>Add Photo (Recommended)</label>
+                  <div class="image-uploader" id="emergency-upload-zone">
+                    <i class="fa-solid fa-camera-retro"></i>
+                    <span>Simulate Photo Capture</span>
+                    <img id="emergency-upload-preview" src="" alt="Upload Preview" style="display:none; max-height:100%; border-radius:6px;">
+                  </div>
+                  <input type="file" id="emergency-file-input" accept="image/*" style="display:none;">
+                </div>
+                
+                <button type="submit" class="btn btn-danger btn-full btn-glow">
+                  <i class="fa-solid fa-radiation"></i> Dispatch Civic Alert
+                </button>
+              </form>
+            </div>
+            
+            <div class="viewport-right glass-card">
+              <h3><i class="fa-solid fa-bullseye"></i> Live Dispatch & Status Tracking</h3>
+              <div class="complaints-list" id="emergency-tickets-container">
+                <!-- Dynamic Tickets -->
+              </div>
+            </div>
+          </div>
+        </section>
+        
+      </div>
+    </main>
+  </div>
+  
+  <!-- REWARD REDEMPTION MODAL -->
+  <div class="modal-overlay" id="reward-claim-modal">
+    <div class="modal-content glass-card reward-modal">
+      <button class="modal-close" id="btn-close-reward-modal"><i class="fa-solid fa-xmark"></i></button>
+      <div class="reward-modal-body">
+        <i class="fa-solid fa-circle-check reward-success-icon green-glow"></i>
+        <h2>Voucher Redeemed Successfully!</h2>
+        <p class="text-muted">A digital ticket has been generated below. Please present the QR code at the service counter to redeem.</p>
+        
+        <div class="ticket-box">
+          <div class="ticket-top">
+            <h3 id="ticket-title">Voucher Title</h3>
+            <p id="ticket-desc">Description</p>
+          </div>
+          <div class="ticket-divider">
+            <div class="ticket-notch left"></div>
+            <div class="ticket-notch right"></div>
+          </div>
+          <div class="ticket-bottom">
+            <div class="ticket-barcode">
+              <svg width="200" height="60">
+                <g fill="#e2e8f0">
+                  <rect x="10" y="5" width="4" height="50"/>
+                  <rect x="18" y="5" width="2" height="50"/>
+                  <rect x="24" y="5" width="8" height="50"/>
+                  <rect x="36" y="5" width="2" height="50"/>
+                  <rect x="42" y="5" width="6" height="50"/>
+                  <rect x="52" y="5" width="4" height="50"/>
+                  <rect x="60" y="5" width="8" height="50"/>
+                  <rect x="72" y="5" width="2" height="50"/>
+                  <rect x="78" y="5" width="6" height="50"/>
+                  <rect x="88" y="5" width="10" height="50"/>
+                  <rect x="102" y="5" width="2" height="50"/>
+                  <rect x="108" y="5" width="4" height="50"/>
+                  <rect x="116" y="5" width="8" height="50"/>
+                  <rect x="128" y="5" width="2" height="50"/>
+                  <rect x="134" y="5" width="6" height="50"/>
+                  <rect x="144" y="5" width="4" height="50"/>
+                  <rect x="152" y="5" width="8" height="50"/>
+                  <rect x="164" y="5" width="2" height="50"/>
+                  <rect x="170" y="5" width="6" height="50"/>
+                  <rect x="180" y="5" width="10" height="50"/>
+                </g>
+              </svg>
+            </div>
+            <span class="ticket-code" id="ticket-code-str">EV-000000-REWARD</span>
+          </div>
+        </div>
+        
+        <button class="btn btn-primary" id="btn-close-reward-ok" style="margin-top: 20px; width: 100%;">
+          Close & Return to Dashboard
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <div class="toast-container" id="toast-container"></div>
+  
+  <!-- Scripts -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  
+  <script src="data.js"></script>
+  <script src="simulation.js"></script>
+  <script src="auth.js"></script>
+  <script src="map.js"></script>
+  <script src="portal.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

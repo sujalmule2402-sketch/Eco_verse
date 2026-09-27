@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Green Knowledge - EcoVerse</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Shared CSS and specific layout styles -->
+  <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="portal.css">
+</head>
+<body>
+  
+  <div class="app-container">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="logo">
+        <a href="index.html" style="display:flex; align-items:center; gap:12px;">
+          <i class="fa-solid fa-leaf green-glow"></i>
+          <span>EcoVerse</span>
+        </a>
+      </div>
+      
+      <nav class="nav-links">
+        <a href="index.html" class="nav-item">
+          <i class="fa-solid fa-house"></i>
+          <span>Home</span>
+        </a>
+        <a href="portal.html" class="nav-item">
+          <i class="fa-solid fa-chart-line"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="portal.html?tab=plant-tree" class="nav-item">
+          <i class="fa-solid fa-seedling"></i>
+          <span>Plant a Tree</span>
+        </a>
+        <a href="portal.html?tab=garbage-spot" class="nav-item">
+          <i class="fa-solid fa-trash-can"></i>
+          <span>Garbage Spotter</span>
+        </a>
+        <a href="portal.html?tab=e-waste" class="nav-item">
+          <i class="fa-solid fa-recycle"></i>
+          <span>E-Waste Centers</span>
+        </a>
+        <a href="#" class="nav-item active">
+          <i class="fa-solid fa-book-open"></i>
+          <span>Green Knowledge</span>
+        </a>
+        <a href="calculator.html" class="nav-item">
+          <i class="fa-solid fa-calculator"></i>
+          <span>Carbon Footprint</span>
+        </a>
+        <a href="portal.html?tab=emergency" class="nav-item">
+          <i class="fa-solid fa-circle-exclamation"></i>
+          <span>Emergency Alerts</span>
+        </a>
+      </nav>
+      
+      <div class="sidebar-footer">
+        <div class="theme-badge">
+          <i class="fa-solid fa-shield-halved"></i>
+          <span>Verified Citizen</span>
+        </div>
+      </div>
+    </aside>
+    
+    <!-- Main Content Area -->
+    <main class="main-content">
+      
+      <!-- Top Header -->
+      <header class="app-header">
+        <div class="header-left">
+          <h1>Green Knowledge Hub</h1>
+          <p class="text-muted">Learn about plants, take quizzes, climb rankings</p>
+        </div>
+        
+        <div class="header-right">
+          <!-- Live AQI widget -->
+          <div class="aqi-widget glass-card">
+            <span class="aqi-dot good"></span>
+            <div>
+              <div class="aqi-title">City AQI: <span class="aqi-val">--</span></div>
+              <div class="aqi-desc">Fetching...</div>
+            </div>
+          </div>
+          
+          <!-- User Profile Summary -->
+          <div class="user-summary glass-card">
+            <div class="points-badge">
+              <i class="fa-solid fa-circle-nodes"></i>
+              <span id="header-points">0</span> <span class="points-lbl">Pts</span>
+            </div>
+            
+            <div class="user-info">
+              <span class="username">You</span>
+              <span class="user-level-badge">Lvl <span id="header-level">1</span></span>
+            </div>
+          </div>
+        </div>
+      </header>
+      
+      <!-- Tabs Nav -->
+      <div class="knowledge-tabs-nav">
+        <button class="k-nav-btn active" data-subtab="encyclopedia">
+          <i class="fa-solid fa-book"></i> Plant Encyclopedia
+        </button>
+        <button class="k-nav-btn" data-subtab="quizzes">
+          <i class="fa-solid fa-circle-question"></i> Eco-Quizzes
+        </button>
+        <button class="k-nav-btn" data-subtab="leaderboard">
+          <i class="fa-solid fa-ranking-star"></i> Leaderboard
+        </button>
+      </div>
+      
+      <!-- SUBTAB 1: ENCYCLOPEDIA -->
+      <div id="encyclopedia-subtab" class="subtab-panel active">
+        <div class="panel-intro glass-card" style="margin-bottom: 20px;">
+          <h2>🌿 Flora Encyclopedia & Research Desk</h2>
+          <p>Browse documented trees below. You can query Wikipedia in real-time to research and append new plants to the municipal guide (earning **+10 Eco Points** each!).</p>
+        </div>
+        
+        <!-- Live Wiki Search Bar -->
+        <div class="search-bar-container glass-card" style="margin-bottom: 20px; display: flex; gap: 12px; padding: 12px 20px; border: 1px solid var(--border-color);">
+          <input type="text" id="plant-search-input" class="form-input" style="flex: 1; margin: 0;" placeholder="Enter any tree or plant name (e.g. Maple, Oak, Lavender, Eucalyptus, Sunflower)...">
+          <button class="btn btn-primary" id="btn-search-plant">
+            <i class="fa-solid fa-globe"></i> Query Wikipedia
+          </button>
+        </div>
+        
+        <div class="plants-grid" id="plants-grid">
+          <!-- Dynamic Plant Cards -->
+        </div>
+      </div>
+      
+      <!-- SUBTAB 2: QUIZZES -->
+      <div id="quizzes-subtab" class="subtab-panel">
+        <div class="panel-intro glass-card">
+          <h2>✏️ Weekly Eco Quizzes</h2>
+          <p>Answer environmental questions to test your eco-knowledge. Correct answers grant **20 Eco Points**!</p>
+        </div>
+        
+        <div class="quiz-container glass-card" id="quiz-block" style="margin-top: 20px;">
+          <div class="quiz-header">
+            <span class="quiz-number">Question <span id="quiz-curr-idx">--</span> of <span id="quiz-total-count">--</span></span>
+            <span class="quiz-reward">+20 Eco Points</span>
+          </div>
+          <h3 class="quiz-question-text" id="quiz-question-txt">Loading questions...</h3>
+          <div class="quiz-options-list" id="quiz-options-container">
+            <!-- Options -->
+          </div>
+          <div class="quiz-feedback-box" id="quiz-feedback-box" style="display:none;">
+            <div class="feedback-indicator">
+              <i class="fa-solid" id="feedback-icon"></i>
+              <span id="feedback-heading">Correct!</span>
+            </div>
+            <p class="feedback-text" id="feedback-desc-txt"></p>
+          </div>
+          <div class="quiz-footer">
+            <button class="btn btn-secondary" id="btn-skip-quiz">Skip</button>
+            <button class="btn btn-primary" id="btn-next-quiz" disabled>Verify Answer</button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- SUBTAB 3: LEADERBOARD -->
+      <div id="leaderboard-subtab" class="subtab-panel">
+        <div class="panel-intro glass-card" style="margin-bottom: 20px;">
+          <h2>🏆 Citizen Eco Leaderboard</h2>
+          <p>See how your efforts stack up against other eco-warriors in the municipal limits. Increase your levels and earn points to climb the ranks!</p>
+        </div>
+        
+        <div class="leaderboard-card glass-card">
+          <div class="leaderboard-header-row">
+            <span class="hdr-rank">Rank</span>
+            <span class="hdr-name">Citizen</span>
+            <span class="hdr-level">Level</span>
+            <span class="hdr-points">Eco Points</span>
+            <span class="hdr-badge">Honorary Badge</span>
+          </div>
+          <div class="leaderboard-list" id="leaderboard-list-container">
+            <!-- Dynamic Leaderboard list -->
+          </div>
+        </div>
+      </div>
+      
+    </main>
+  </div>
+  
+  <!-- PLANT DETAIL MODAL -->
+  <div class="modal-overlay" id="plant-detail-modal">
+    <div class="modal-content glass-card">
+      <button class="modal-close" id="btn-close-modal"><i class="fa-solid fa-xmark"></i></button>
+      <div class="modal-body" id="plant-detail-body">
+        <!-- Dynamic Plant Details -->
+      </div>
+    </div>
+  </div>
+  
+  <div class="toast-container" id="toast-container"></div>
+  
+  <!-- Core Scripts -->
+  <script src="data.js"></script>
+  <script src="auth.js"></script>
+  <script src="education.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

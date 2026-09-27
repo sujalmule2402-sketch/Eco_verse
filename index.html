@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoVerse - Smart Green City Platform</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Shared & Landing Styles -->
+  <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="landing.css">
+</head>
+<body class="landing-body">
+
+  <!-- Landing Navigation -->
+  <nav class="landing-nav">
+    <div class="landing-logo">
+      <i class="fa-solid fa-leaf"></i>
+      <span>EcoVerse</span>
+    </div>
+    
+    <div class="landing-actions">
+      <a href="portal.html" class="btn btn-primary btn-glow">
+        <i class="fa-solid fa-rocket"></i> Launch Portal
+      </a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="landing-hero">
+    <span class="hero-tag"><i class="fa-solid fa-shield-heart"></i> Empowering Smart Cities</span>
+    <h1>Help Your City Breathe. Become an <span class="green-text">Eco-Citizen</span></h1>
+    <p>EcoVerse combines community participation, rewards, and direct communication with municipal corporations to make cities cleaner, greener, and more sustainable. Plant trees, report trash, recycle electronics, and earn points.</p>
+    
+    <div class="hero-actions">
+      <a href="portal.html" class="btn btn-primary btn-glow" style="padding: 14px 28px; font-size: 1rem;">
+        <i class="fa-solid fa-circle-nodes"></i> Enter Citizen Portal
+      </a>
+      <a href="calculator.html" class="btn btn-secondary" style="padding: 14px 28px; font-size: 1rem;">
+        <i class="fa-solid fa-calculator"></i> Calculate Footprint
+      </a>
+    </div>
+  </header>
+
+  <!-- Impact Statistics counter highlights -->
+  <section class="impact-section">
+    <div class="impact-wrapper">
+      <div class="impact-col">
+        <h3 id="stat-planted">1,248</h3>
+        <p>Saplings Planted</p>
+      </div>
+      <div class="impact-col">
+        <h3 id="stat-recycled">4.8</h3>
+        <p>Tons E-Waste Recycled</p>
+      </div>
+      <div class="impact-col">
+        <h3 id="stat-garbage">842</h3>
+        <p>Trash Spots Cleared</p>
+      </div>
+      <div class="impact-col">
+        <h3 id="stat-resolved">98.4%</h3>
+        <p>Civic Issues Resolved</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Core Modules features list -->
+  <section class="landing-features-section">
+    <div class="section-head">
+      <h2>How EcoVerse Works</h2>
+      <p class="text-muted">Explore the key modules designed to facilitate municipal cleanup and community greening.</p>
+    </div>
+    
+    <div class="features-grid">
+      
+      <!-- Feature 1 -->
+      <div class="landing-feature-card glass-card">
+        <div class="feat-icon"><i class="fa-solid fa-seedling"></i></div>
+        <h3>Plant a Tree & Get Points</h3>
+        <p>Log your new sapling with our camera simulation. Our AI confirms the species and tags coordinates to place it on the municipal forestry map. Retain reminders to earn points.</p>
+        <a href="portal.html?tab=plant-tree" class="btn btn-secondary btn-sm" style="margin-top:auto; font-size:0.8rem; padding: 6px 12px; align-self: flex-start;">
+          Plant sapling <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+
+      <!-- Feature 2 -->
+      <div class="landing-feature-card glass-card">
+        <div class="feat-icon"><i class="fa-solid fa-dumpster"></i></div>
+        <h3>Garbage Spot Reporting</h3>
+        <p>Take pictures of scattered waste in public lanes. Geotagged coordinates submit the cleanup request to the Municipal Corporation. Tracking logs updates citizens on status changes.</p>
+        <a href="portal.html?tab=garbage-spot" class="btn btn-secondary btn-sm" style="margin-top:auto; font-size:0.8rem; padding: 6px 12px; align-self: flex-start;">
+          Report trash <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+
+      <!-- Feature 3 -->
+      <div class="landing-feature-card glass-card">
+        <div class="feat-icon"><i class="fa-solid fa-bolt"></i></div>
+        <h3>Authorized E-Waste recycling</h3>
+        <p>Trace nearby authorized collection facilities. Deposit laptops, batteries, or chargers, scan the center's QR code, and receive Eco Points to swap for transport nursery passes.</p>
+        <a href="portal.html?tab=e-waste" class="btn btn-secondary btn-sm" style="margin-top:auto; font-size:0.8rem; padding: 6px 12px; align-self: flex-start;">
+          Find center <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+
+      <!-- Feature 4 -->
+      <div class="landing-feature-card glass-card">
+        <div class="feat-icon"><i class="fa-solid fa-calculator"></i></div>
+        <h3>Carbon Footprint Assessment</h3>
+        <p>Assess your monthly carbon footprint. Tweak home energy consumption, travel range, and recycling rates to view how your lifestyle compares to global sustainability objectives.</p>
+        <a href="calculator.html" class="btn btn-secondary btn-sm" style="margin-top:auto; font-size:0.8rem; padding: 6px 12px; align-self: flex-start;">
+          Open calculator <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+
+      <!-- Feature 5 -->
+      <div class="landing-feature-card glass-card">
+        <div class="feat-icon"><i class="fa-solid fa-book-open"></i></div>
+        <h3>Flora Encyclopedia & Quizzes</h3>
+        <p>Learn about trees via Wikipedia searches. Test your eco-acumen in our gamified quizzes to unlock badges (Leaf Legend, Grand Eco-Guardian) and earn points.</p>
+        <a href="education.html" class="btn btn-secondary btn-sm" style="margin-top:auto; font-size:0.8rem; padding: 6px 12px; align-self: flex-start;">
+          Open encyclopedia <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+
+      <!-- Feature 6 -->
+      <div class="landing-feature-card glass-card">
+        <div class="feat-icon"><i class="fa-solid fa-circle-exclamation"></i></div>
+        <h3>Emergency Civic Alerts</h3>
+        <p>Report severe municipal leaks, electricity pole sparks, potholes, or sewage blockages directly to the repair dispatch crew. Track the live deployment logs.</p>
+        <a href="portal.html?tab=emergency" class="btn btn-secondary btn-sm" style="margin-top:auto; font-size:0.8rem; padding: 6px 12px; align-self: flex-start;">
+          File alert <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="padding: 40px; text-align: center; border-top: 1px solid rgba(255,255,255,0.03); color: var(--text-muted); font-size: 0.85rem;">
+    <p>© 2026 EcoVerse Smart City Platform • Partnered with Municipal Corporation.</p>
+  </footer>
+
+  <!-- Core Scripts -->
+  <script src="auth.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

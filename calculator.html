@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carbon Footprint Calculator - EcoVerse</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="portal.css">
+  <link rel="stylesheet" href="calculator.css">
+</head>
+<body>
+
+  <div class="app-container">
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="logo">
+        <a href="index.html" style="display:flex; align-items:center; gap:12px;">
+          <i class="fa-solid fa-leaf green-glow"></i>
+          <span>EcoVerse</span>
+        </a>
+      </div>
+      
+      <nav class="nav-links">
+        <a href="index.html" class="nav-item">
+          <i class="fa-solid fa-house"></i>
+          <span>Home</span>
+        </a>
+        <a href="portal.html" class="nav-item">
+          <i class="fa-solid fa-chart-line"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="portal.html" class="nav-item">
+          <i class="fa-solid fa-seedling"></i>
+          <span>Plant a Tree</span>
+        </a>
+        <a href="portal.html" class="nav-item">
+          <i class="fa-solid fa-trash-can"></i>
+          <span>Garbage Spotter</span>
+        </a>
+        <a href="portal.html" class="nav-item">
+          <i class="fa-solid fa-recycle"></i>
+          <span>E-Waste Centers</span>
+        </a>
+        <a href="education.html" class="nav-item">
+          <i class="fa-solid fa-book-open"></i>
+          <span>Green Knowledge</span>
+        </a>
+        <a href="calculator.html" class="nav-item active">
+          <i class="fa-solid fa-calculator"></i>
+          <span>Carbon Footprint</span>
+        </a>
+        <a href="portal.html" class="nav-item">
+          <i class="fa-solid fa-circle-exclamation"></i>
+          <span>Emergency Alerts</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="theme-badge">
+          <i class="fa-solid fa-shield-halved"></i>
+          <span>Verified Citizen</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+      <!-- Top Header -->
+      <header class="app-header">
+        <div class="header-left">
+          <h1>Carbon Footprint Calculator</h1>
+          <p class="text-muted">Measure, understand & reduce your environmental impact</p>
+        </div>
+
+        <div class="header-right">
+          <div class="aqi-widget glass-card">
+            <span class="aqi-dot good"></span>
+            <div>
+              <div class="aqi-title">City AQI: <span class="aqi-val">--</span></div>
+              <div class="aqi-desc">Fetching...</div>
+            </div>
+          </div>
+          <div class="user-summary glass-card">
+            <div class="points-badge">
+              <i class="fa-solid fa-circle-nodes"></i>
+              <span id="header-points">0</span> <span class="points-lbl">Pts</span>
+            </div>
+            <div class="user-info">
+              <span class="username">You</span>
+              <span class="user-level-badge">Lvl <span id="header-level">1</span></span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Page Intro Banner -->
+      <div class="calc-intro glass-card">
+        <h2 style="margin-bottom:8px; font-size:1.1rem;">
+          <i class="fa-solid fa-cloud" style="color:var(--primary); margin-right:8px;"></i>
+          Your Monthly Carbon Emissions Estimator
+        </h2>
+        <p style="color:var(--text-secondary); font-size:0.88rem; line-height:1.6; max-width:720px;">
+          Adjust the sliders below for your household electricity, fuel travel, public transit, and monthly recycling. We calculate your estimated annual CO₂ output in metric tons and compare it against global sustainability targets. Aim to stay under <strong style="color:var(--primary);">2.0 Tons/Year</strong> — the Paris Agreement target.
+        </p>
+      </div>
+
+      <!-- Main Calculator Grid -->
+      <div class="calc-grid">
+
+        <!-- LEFT: Inputs -->
+        <div class="calc-section">
+
+          <!-- Electricity -->
+          <div class="panel-section glass-card">
+            <h3 class="section-title">
+              <i class="fa-solid fa-plug"></i> Household Electricity
+            </h3>
+
+            <div class="slider-group">
+              <div class="slider-header">
+                <span class="slider-label"><i class="fa-solid fa-bolt"></i> Monthly Consumption</span>
+                <span class="slider-val" id="val-electricity">250 KWh</span>
+              </div>
+              <input type="range" class="custom-slider" id="slide-electricity" min="50" max="1000" value="250" step="10">
+              <div style="display:flex; justify-content:space-between; font-size:0.7rem; color:var(--text-muted); margin-top:4px;">
+                <span>50 KWh (Minimal)</span>
+                <span>1000 KWh (Heavy)</span>
+              </div>
+            </div>
+
+            <div class="slider-group" style="margin-top:10px;">
+              <p class="text-xs text-muted">
+                <i class="fa-solid fa-circle-info" style="color:var(--primary); margin-right:6px;"></i>
+                Average Indian household uses ~100–300 KWh/month. Each KWh generates ~0.82 kg CO₂.
+              </p>
+            </div>
+          </div>
+
+          <!-- Private Vehicle -->
+          <div class="panel-section glass-card">
+            <h3 class="section-title">
+              <i class="fa-solid fa-car-side"></i> Private Vehicle Travel
+            </h3>
+
+            <div class="slider-group">
+              <div class="slider-header">
+                <span class="slider-label"><i class="fa-solid fa-road"></i> Monthly Distance Driven</span>
+                <span class="slider-val" id="val-fuel">500 Km</span>
+              </div>
+              <input type="range" class="custom-slider" id="slide-fuel" min="0" max="3000" value="500" step="50">
+              <div style="display:flex; justify-content:space-between; font-size:0.7rem; color:var(--text-muted); margin-top:4px;">
+                <span>0 Km (None)</span>
+                <span>3000 Km (Heavy commute)</span>
+              </div>
+            </div>
+
+            <div class="slider-group" style="margin-top:10px;">
+              <p class="text-xs text-muted">
+                <i class="fa-solid fa-circle-info" style="color:var(--primary); margin-right:6px;"></i>
+                Petrol cars average ~170g CO₂ per km. Switch to EV or bike for trips under 5km.
+              </p>
+            </div>
+          </div>
+
+          <!-- Public Transit -->
+          <div class="panel-section glass-card">
+            <h3 class="section-title">
+              <i class="fa-solid fa-bus"></i> Public Transit
+            </h3>
+
+            <div class="slider-group">
+              <div class="slider-header">
+                <span class="slider-label"><i class="fa-solid fa-ticket"></i> Monthly Distance by Bus / Metro</span>
+                <span class="slider-val" id="val-transit">100 Km</span>
+              </div>
+              <input type="range" class="custom-slider" id="slide-transit" min="0" max="1500" value="100" step="10">
+              <div style="display:flex; justify-content:space-between; font-size:0.7rem; color:var(--text-muted); margin-top:4px;">
+                <span>0 Km</span>
+                <span>1500 Km</span>
+              </div>
+            </div>
+
+            <div class="slider-group" style="margin-top:10px;">
+              <p class="text-xs text-muted">
+                <i class="fa-solid fa-circle-info" style="color:var(--primary); margin-right:6px;"></i>
+                Bus emits only ~50g CO₂/km per passenger — 70% cleaner than a solo petrol car.
+              </p>
+            </div>
+          </div>
+
+          <!-- Recycling Offset -->
+          <div class="panel-section glass-card">
+            <h3 class="section-title">
+              <i class="fa-solid fa-recycle"></i> Monthly Recycling & Composting
+            </h3>
+
+            <div class="slider-group">
+              <div class="slider-header">
+                <span class="slider-label"><i class="fa-solid fa-box-archive"></i> Dry & Organic Waste Recycled</span>
+                <span class="slider-val" id="val-waste">10 Kg</span>
+              </div>
+              <input type="range" class="custom-slider" id="slide-waste" min="0" max="80" value="10" step="1">
+              <div style="display:flex; justify-content:space-between; font-size:0.7rem; color:var(--text-muted); margin-top:4px;">
+                <span>0 Kg (No recycling)</span>
+                <span>80 Kg (Excellent)</span>
+              </div>
+            </div>
+
+            <div class="slider-group" style="margin-top:10px;">
+              <p class="text-xs text-muted">
+                <i class="fa-solid fa-circle-info" style="color:var(--primary); margin-right:6px;"></i>
+                Recycling 1 kg of waste offsets ~1.2 kg of CO₂ by reducing landfill methane.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- RIGHT: Results -->
+        <div class="calc-section">
+
+          <!-- Main Score Card -->
+          <div class="results-card glass-card">
+            <h3 class="section-title" style="align-self:flex-start;">
+              <i class="fa-solid fa-gauge-high"></i> Your Annual Footprint
+            </h3>
+
+            <div class="footprint-circle">
+              <span class="val" id="carbon-total-score">0.0</span>
+              <span class="unit">Tons CO₂ / Year</span>
+            </div>
+
+            <p class="text-xs text-muted" style="text-align:center; max-width:260px; line-height:1.5;">
+              Global sustainability target: <strong style="color:var(--primary);">≤2.0 Tons/Year</strong>. World average is 4.7 Tons. India average is 1.9 Tons.
+            </p>
+
+            <!-- Comparison Chart -->
+            <div class="comparison-chart-box" style="width:100%; text-align:left;">
+              <h4 style="font-size:0.85rem; margin-bottom:14px; font-weight:600;">
+                <i class="fa-solid fa-chart-bar" style="color:var(--primary); margin-right:6px;"></i>
+                Compare Against Averages
+              </h4>
+
+              <!-- User Bar -->
+              <div class="comparison-row">
+                <div class="comparison-labels">
+                  <span style="color:#fff; font-weight:600;">You</span>
+                  <span id="lbl-user-bar">0.0 Tons</span>
+                </div>
+                <div class="comparison-bar-track">
+                  <div class="comparison-bar user-bar" id="bar-user" style="width:0%"></div>
+                </div>
+              </div>
+
+              <!-- World Average Bar -->
+              <div class="comparison-row" style="margin-top:10px;">
+                <div class="comparison-labels">
+                  <span>World Average</span>
+                  <span>4.7 Tons</span>
+                </div>
+                <div class="comparison-bar-track">
+                  <div class="comparison-bar avg-bar" id="bar-world" style="width:47%"></div>
+                </div>
+              </div>
+
+              <!-- Paris Target Bar -->
+              <div class="comparison-row" style="margin-top:10px;">
+                <div class="comparison-labels">
+                  <span style="color:var(--secondary);">Paris 2°C Target</span>
+                  <span style="color:var(--secondary);">2.0 Tons</span>
+                </div>
+                <div class="comparison-bar-track">
+                  <div class="comparison-bar target-bar" style="width:20%"></div>
+                </div>
+              </div>
+
+              <!-- India Average Bar -->
+              <div class="comparison-row" style="margin-top:10px;">
+                <div class="comparison-labels">
+                  <span>India Average</span>
+                  <span>1.9 Tons</span>
+                </div>
+                <div class="comparison-bar-track">
+                  <div class="comparison-bar" style="width:19%; background:#6b7280;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recommendations Card -->
+          <div class="panel-section glass-card">
+            <h3 class="section-title">
+              <i class="fa-solid fa-leaf"></i> Personalized Eco-Recommendations
+            </h3>
+            <p class="text-xs text-muted" style="margin-bottom:14px;">Based on your current slider inputs, here are the most impactful actions you can take:</p>
+            <div class="recommendations-list" id="recs-container">
+              <!-- Dynamic cards injected by calculator.js -->
+            </div>
+          </div>
+
+          <!-- Emissions breakdown card -->
+          <div class="panel-section glass-card">
+            <h3 class="section-title">
+              <i class="fa-solid fa-circle-half-stroke"></i> What You Can Do Next
+            </h3>
+            <div style="display:flex; flex-direction:column; gap:10px; margin-top:4px;">
+              <a href="portal.html" class="btn btn-secondary btn-sm" style="justify-content:flex-start; gap:10px; padding:12px 16px; font-size:0.82rem;">
+                <i class="fa-solid fa-seedling" style="color:var(--primary);"></i> Plant a tree to offset your footprint
+              </a>
+              <a href="portal.html" class="btn btn-secondary btn-sm" style="justify-content:flex-start; gap:10px; padding:12px 16px; font-size:0.82rem;">
+                <i class="fa-solid fa-bolt" style="color:var(--primary);"></i> Recycle your e-waste at a certified center
+              </a>
+              <a href="education.html" class="btn btn-secondary btn-sm" style="justify-content:flex-start; gap:10px; padding:12px 16px; font-size:0.82rem;">
+                <i class="fa-solid fa-book-open" style="color:var(--primary);"></i> Learn how cities can cut emissions
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="data.js"></script>
+  <script src="auth.js"></script>
+  <script src="calculator.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

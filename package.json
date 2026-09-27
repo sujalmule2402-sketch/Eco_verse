@@ -1,0 +1,17 @@
+{
+  "name": "eco-project",
+  "version": "1.0.0",
+  "description": "EcoVerse - Smart Green City Platform",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "eco",
+    "smart-city",
+    "green",
+    "portal"
+  ],
+  "author": "",
+  "license": "ISC"
+}
